@@ -1,0 +1,31 @@
+; Engine configuration file.
+; Fruit Slash - original arcade prototype
+
+config_version=5
+
+[application]
+config/name="Fruit Slash"
+run/main_scene="res://scenes/game/main.tscn"
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+environment/defaults/default_clear_color=Color(0.025, 0.035, 0.07, 1)
+
+[input]
+start_game={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"physical_keycode":32,"unicode":32)]
+}
+
+[layer_names]
+3d_physics/layer_1="Sliceable"
+
