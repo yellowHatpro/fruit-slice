@@ -32,7 +32,7 @@ func _run() -> void:
 
 	var fruit := Sliceable.new()
 	root.add_child(fruit)
-	fruit.configure(Sliceable.Kind.FRUIT, Color.RED, Vector3.ZERO, null)
+	fruit.configure(Sliceable.Kind.FRUIT, 0, Vector3.ZERO, null)
 	var slice_count := [0]
 	fruit.sliced.connect(func(_item: Sliceable, _position: Vector2, _points: int) -> void: slice_count[0] += 1)
 	fruit.slice_at(Vector2.ZERO, Vector2.RIGHT)
