@@ -5,8 +5,15 @@ signal hud_changed(score: int, lives: int, combo: int, high_score: int)
 signal state_changed(state: State)
 
 enum State { START, PLAYING, GAME_OVER }
+enum Difficulty { BREEZY, CLASSIC, FRENZY }
+
+const DIFFICULTY_NAMES: Array[String] = ["BREEZY", "CLASSIC", "FRENZY"]
+const BASE_PRESSURE: Array[float] = [0.82, 1.0, 1.28]
+const RAMP_SECONDS: Array[float] = [105.0, 75.0, 52.0]
+const MAX_RAMP: Array[float] = [0.78, 1.2, 1.5]
 
 var state := State.START
+var selected_difficulty := Difficulty.CLASSIC
 var score := 0
 var lives := 3
 var combo := 0
@@ -14,7 +21,8 @@ var high_score := 0
 var elapsed := 0.0
 var last_slice_time := -10.0
 
-func start_run() -> void:
+func start_run(difficulty_level: int = Difficulty.CLASSIC) -> void:
+	selected_difficulty = clampi(difficulty_level, Difficulty.BREEZY, Difficulty.FRENZY)
 	state = State.PLAYING
 	score = 0
 	lives = 3
@@ -67,9 +75,14 @@ func _process(delta: float) -> void:
 
 
 func difficulty() -> float:
-	return 1.0 + minf(elapsed / 75.0, 1.2)
+	var base := BASE_PRESSURE[selected_difficulty]
+	var ramp := minf(elapsed / RAMP_SECONDS[selected_difficulty], MAX_RAMP[selected_difficulty])
+	return base + ramp
+
+
+func difficulty_name() -> String:
+	return DIFFICULTY_NAMES[selected_difficulty]
 
 
 func _emit_hud() -> void:
 	hud_changed.emit(score, lives, combo, high_score)
-

@@ -20,6 +20,16 @@ func _run() -> void:
 	manager.start_run()
 	_check(manager.state == GameManager.State.PLAYING, "run enters playing state")
 	_check(manager.score == 0 and manager.lives == 3, "run resets score and lives")
+	manager.start_run(GameManager.Difficulty.BREEZY)
+	var breezy_pressure := manager.difficulty()
+	manager.start_run(GameManager.Difficulty.FRENZY)
+	var frenzy_pressure := manager.difficulty()
+	_check(breezy_pressure < frenzy_pressure, "difficulty presets increase starting spawn pressure")
+	manager.start_run(GameManager.Difficulty.CLASSIC)
+	var opening_pressure := manager.difficulty()
+	manager.elapsed = 75.0
+	_check(manager.difficulty() > opening_pressure, "spawn pressure ramps during a run")
+	manager.elapsed = 0.0
 	manager.record_slice(10)
 	manager.record_slice(10)
 	manager.record_slice(10)
