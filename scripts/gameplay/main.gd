@@ -328,7 +328,7 @@ func _on_bomb_hit(_item: Sliceable) -> void:
 
 
 func _update_hud(score: int, lives: int, combo: int, high_score: int) -> void:
-	hud_label.text = "SCORE  %05d\nBEST   %05d\nLIVES  %s\nMODE   %s" % [score, high_score, "●".repeat(maxi(lives, 0)), game_manager.difficulty_name()]
+	hud_label.text = "SCORE  %05d\nBEST   %05d\nLIVES  %d / 3\nMODE   %s" % [score, high_score, maxi(lives, 0), game_manager.difficulty_name()]
 	combo_label.text = "COMBO ×%d" % combo if combo >= 2 else ""
 
 

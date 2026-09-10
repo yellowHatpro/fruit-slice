@@ -30,3 +30,17 @@ godot --headless --path . --export-release Web exports/web/index.html
 Serve the generated `exports/web/` directory through HTTP; browsers generally
 do not allow the build to run correctly when `index.html` is opened directly
 from the filesystem. Mouse and touch slicing use the same input implementation.
+
+## Deploy to Vercel
+
+Use the guarded deployment command:
+
+```sh
+./scripts/deploy_web.sh
+```
+
+It first requires a clean Git working tree, runs the smoke tests, clears stale
+Web output, creates a fresh export, and only then deploys that output to Vercel
+production. This keeps the deployed site tied to a committed source revision.
+The first run may ask you to authenticate or link the generated directory to a
+Vercel project.
