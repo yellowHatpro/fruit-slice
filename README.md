@@ -2,6 +2,10 @@
 
 An original, lightweight 3D fruit-slicing arcade game built with Godot 4.
 
+## Play online
+
+**[Launch Fruit Slash in your browser](https://fruit-slice-virid.vercel.app)**
+
 ## Play
 
 Open `project.godot` in Godot 4, or run:
